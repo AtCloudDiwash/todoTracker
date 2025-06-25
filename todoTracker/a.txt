@@ -1,0 +1,9 @@
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY4NTgxM2Y3YmZjN2ZiMDFiYzNiZDY2YiIsImlhdCI6MTc1MDYwMjc0OX0.rQzIDu7OleiePls4qsWl9-_F3QcClvxsjYFpTJkljIs
+
+{
+	"email":"test1@gmail.com",
+	"password":"global123"
+}
+
+"_id": "68582d3591d412cab9fa1a5f",
+"userId": "685813f7bfc7fb01bc3bd66b",

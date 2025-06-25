@@ -1,0 +1,25 @@
+.signupBtn{
+    width: 11rem;
+    height: 4.5rem;
+    background: linear-gradient(
+        to right,
+        var(--primary-color2) 0%,
+        var(--primary-color1) 100%
+      );
+    outline: none;
+    border: none;
+    font-size: 1.6rem;
+    color: var(--secondary-color2);
+    border-radius: .5rem;  
+    cursor: pointer;
+    transition: transform .3s ease;
+}
+
+.signupBtn:hover{
+    transform: scale(1.05);
+    box-shadow: 1rem 0 25rem var(--primary-color2), -1rem 0rem 25rem var(--primary-color1);
+}
+
+.signupBtn:active{
+    transform: scale(.9);
+}

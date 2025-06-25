@@ -1,0 +1,43 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+}
+
+:root {
+  --primary-color1: #9801ff; /* Primary color 1*/
+  --primary-color2: #c90eff; /* Primary color 2*/
+  --secondary-color1: #000000; /* Secondary color */
+  --secondary-color2: #fff; /* Secondary color */
+  --font-size-base: 10px; /* Global font size */
+  --spacing-unit: 16px; /* Base spacing unit */
+  --max-width: 1200px; /* Max width */
+  --small-screen: 600px; /* Small screen breakpoint */
+  --medium-screen: 1024px; /* Medium screen breakpoint */
+
+  --hero-text-size1: 98px;
+  --hero-text-size2: 80px;
+
+  --primary-font-family: "Jockey One";
+
+  --text-success: #28a745;
+  --text-danger: #dc3545;
+}
+
+html{
+  font-size: 10px; 
+}
+body {
+  font-family: Arial, sans-serif; /* Set global font */
+background-color: var(--secondary-color1);
+
+}
+
+@font-face {
+  font-family: "Jockey One";
+  src: url("./assets/fonts/Jockey_One/JockeyOne-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}

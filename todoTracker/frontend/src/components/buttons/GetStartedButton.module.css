@@ -1,0 +1,27 @@
+.getStartedBtn{
+    width: 17rem;
+    height: 4.5rem;
+    background: linear-gradient(
+        to right,
+        var(--primary-color2) 0%,
+        var(--primary-color1) 100%
+      );
+    outline: none;
+    border: none;
+    font-size: 1.6rem;
+    color: var(--secondary-color2);
+    border-radius: .5rem;  
+    cursor: pointer;
+    font-weight: bold;
+    transition: .3s ease;
+    cursor: pointer;
+}
+
+.getStartedBtn:active{
+  transform: scale(.9);
+}
+
+.arrowUp{
+  height: 4rem;
+  user-select: none;
+}

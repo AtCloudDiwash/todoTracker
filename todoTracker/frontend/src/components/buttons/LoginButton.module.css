@@ -1,0 +1,39 @@
+.loginBtn {
+  width: 11rem;
+  height: 4.5rem;
+  color: var(--secondary-color2);
+  border-radius: 0.5rem;
+  position: relative;
+  border: none;
+  background-color: var(--secondary-color1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  outline: none;
+  transition: .3s ease;
+}
+
+.loginBtn::before {
+  content: "";
+  position: absolute;
+  height: 112%;
+  width: 104%;
+  border-radius: 0.5rem;
+  background-image: linear-gradient(
+    to bottom right,
+    var(--primary-color2),
+    var(--primary-color1)
+  );
+  z-index: -1;
+  cursor: pointer;
+
+}
+
+.loginBtn:hover{
+    z-index: 0;
+    box-shadow: 1rem 0 25rem var(--primary-color2), -1rem 0rem 25rem var(--primary-color1);
+}
+
+.loginBtn:active{
+  transform: scale(.9);
+}
