@@ -1,0 +1,44 @@
+# Node modules
+node_modules/
+frontend/node_modules/
+
+# Environment files
+.env
+.env.*  # Covers things like .env.local, .env.production
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build outputs
+frontend/dist/
+dist/
+build/
+
+# Vite/CRA cache
+.vite/
+.cache/
+
+# Editor settings
+.idea/
+.vscode/
+*.swp
+
+# Optional test coverage
+coverage/
+
+# Local database or uploads (if any)
+uploads/
+*.sqlite
+*.log
+
+# PM2 process files (if using)
+pids/
+*.pid
+*.seed
