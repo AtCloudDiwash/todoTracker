@@ -28,11 +28,11 @@ export default function Landing() {
       return () => window.removeEventListener("load", handleLoad);
     }
   }, []);
-  useEffect(() => {
-    if (isLogged) {
-      navigate("/home");
-    }
-  }, [isLogged, navigate]);
+  // useEffect(() => {
+  //   if (isLogged) {
+  //     navigate("/home");
+  //   }
+  // }, [isLogged, navigate]);
 
   if (loading) {
     return <Preloader />;

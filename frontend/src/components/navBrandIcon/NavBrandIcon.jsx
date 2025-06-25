@@ -1,4 +1,3 @@
-import { Cursor } from "mongoose";
 import Icon from "../../assets/navbrand.svg";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";

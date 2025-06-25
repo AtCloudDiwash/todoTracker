@@ -25,7 +25,7 @@ async function signupUser(req, res) {
       $or: [{ username }, { email }],
     });
     if (existingUser) {
-      return res.status(409).json({ error: "User already exists" });
+      return res.status(409).json({ error: "User with the username or the email already exists" });
       
     }
 
