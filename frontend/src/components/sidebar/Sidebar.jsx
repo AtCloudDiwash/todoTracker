@@ -22,7 +22,7 @@ export default function Sidebar({ setSelectedView }) {
   useEffect(() => {
     const getRecentHistories = async () => {
       try {
-        const response = await fetch("http://localhost:3000/recent-updates", {
+        const response = await fetch(`${import.meta.env.VITE_REACT_APP_RENDERER_URL}/recent-updates`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

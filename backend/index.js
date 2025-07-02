@@ -19,7 +19,7 @@ app.use((req, res) => {
 });
 
 connectDB().then(() => {
-  app.listen(PORT, () => {
+  app.listen(PORT, process.env.RENDERER_IP,() => {
     console.log(`Server listening at port ${PORT}`);
   });
 });

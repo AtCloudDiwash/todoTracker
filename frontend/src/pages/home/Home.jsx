@@ -4,7 +4,6 @@ import Sidebar from "../../components/sidebar/Sidebar";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import Preloader from "../../components/preloader/Preloader";
-import TodoCard from "../../components/todoCard/TodoCard";
 import ProfileToggle from "../../components/profileToggle/ProfileToggle";
 import { useUserDetails } from "../../context/userDetailsContext";
 import AddTaskView from "../addTodo/AddTaskView";

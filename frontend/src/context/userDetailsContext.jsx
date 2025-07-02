@@ -4,7 +4,6 @@ import {useNavigate} from "react-router-dom";
 const UserDetailsContext = createContext();
 
 export const UserDetailsProvider = ({ children }) => {
-    const navigate = useNavigate();
 
     const [username, setUsername] = useState("Guest 007");
     
@@ -14,13 +13,16 @@ export const UserDetailsProvider = ({ children }) => {
         
     try{
 
-        const response = await fetch("http://localhost:3000/get-user-details",{
+        const response = await fetch(
+          `${import.meta.env.VITE_REACT_APP_RENDERER_URL}/get-user-details`,
+          {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
-                "Authorization": localStorage.getItem("token")
-            }
-        });
+              "Content-Type": "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+          }
+        );
 
         if(response.status == 200){
             const username = await response.json();

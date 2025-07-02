@@ -17,7 +17,7 @@ export default function AddTaskView() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:3000/add", {
+      const response = await fetch(`${import.meta.env.VITE_REACT_APP_RENDERER_URL}/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

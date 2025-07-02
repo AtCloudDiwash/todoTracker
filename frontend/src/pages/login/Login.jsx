@@ -30,7 +30,7 @@ export default function Login() {
     setSuccessMessage("");
 
     try {
-      const response = await fetch("http://localhost:3000/signin", {
+      const response = await fetch(`${import.meta.env.VITE_REACT_APP_RENDERER_URL}/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -40,7 +40,7 @@ export default function TodoCard({ title, deadline, id, expireThem = true}) {
   useEffect(()=>{
     const todoCompleted = async ()=>{
       try {
-        const response = await fetch("http://localhost:3000/todo-completed", {
+        const response = await fetch(`${import.meta.env.VITE_REACT_APP_RENDERER_URL}/todo-completed`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -115,7 +115,7 @@ export default function TodoCard({ title, deadline, id, expireThem = true}) {
   const handleUpdate = async () => {
 
       try{
-        const response = await fetch("http://localhost:3000/edit", {
+        const response = await fetch(`${import.meta.env.VITE_REACT_APP_RENDERER_URL}/edit`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
@@ -153,7 +153,7 @@ useEffect(()=>{
 }, [editTitle, editDeadline])
   const handleDelete = async () => {
     try{
-      const response = await fetch("http://localhost:3000/delete", {
+      const response = await fetch(`${import.meta.env.VITE_REACT_APP_RENDERER_URL}/delete`, {
         method:"DELETE",
         headers:{
           "Content-Type": "application/json",

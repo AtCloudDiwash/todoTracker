@@ -25,7 +25,7 @@ export default function TaskListView(){
 
     async function getTodos(){
       try {
-        const response = await fetch("http://localhost:3000/all/false", {
+        const response = await fetch(`${import.meta.env.VITE_REACT_APP_RENDERER_URL}/all/false`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

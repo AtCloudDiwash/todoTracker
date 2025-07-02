@@ -66,7 +66,7 @@ export default function Signup() {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:3000/signup", {
+      const response = await fetch(`${import.meta.env.VITE_REACT_APP_RENDERER_URL}/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

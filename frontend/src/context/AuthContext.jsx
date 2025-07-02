@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem("token");
 
     try{
-        const response = await fetch("http://localhost:3000/check-auth", {
+        const response = await fetch(`${import.meta.env.VITE_REACT_APP_RENDERER_URL}/check-auth`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -29,7 +29,6 @@ export const AuthProvider = ({ children }) => {
              setIsLogged(false);
         }
     } catch(err){
-        console.log("Network error");
         setIsLogged(false);
     }
 }
