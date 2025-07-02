@@ -24,7 +24,9 @@ async function signinUser(req, res){
 
     try{
 
-        const userFound = await UserModel.findOne({email});
+        const userFound = await UserModel.findOne({
+          email: { $regex: new RegExp(`^${email}$`, "i") },
+        });
 
         if(!userFound){
             return res.status(404).json({error: "User not found"});

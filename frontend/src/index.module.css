@@ -24,10 +24,15 @@
 
   --text-success: #28a745;
   --text-danger: #dc3545;
+  --primary-color1-shaded: #5B0199;
+
 }
+
 
 html{
   font-size: 10px; 
+
+  overflow: hidden;
 }
 body {
   font-family: Arial, sans-serif; /* Set global font */

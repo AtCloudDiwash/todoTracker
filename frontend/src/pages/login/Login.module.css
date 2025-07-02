@@ -1,136 +1,157 @@
 .container {
-    width: 100%;
-    height: 100vh;
-    background-color: var(--secondary-color1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 2rem;
-  }
-  
-  .navbar {
-    width: 100%;
-    padding: 1rem 2rem;
-    display: flex;
-    justify-content: flex-start;
-  }
-  
+  width: 100%;
+  height: 100vh;
+  background-color: var(--secondary-color1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: clamp(1rem, 4vh, 2rem);
+}
+
+.navbar {
+  width: 100%;
+  padding: clamp(1rem, 2.5vw, 2rem);
+  display: flex;
+  justify-content: flex-start;
+}
+
+.formWrapper {
+  background-color: #000;
+  padding: clamp(2rem, 6vw, 2.5rem);
+  border-radius: 1rem;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 0 30px var(--primary-color1);
+  display: flex;
+  flex-direction: column;
+  color: var(--secondary-color2);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.formHeaders {
+  text-align: center;
+  margin-bottom: clamp(1.5rem, 4vh, 2rem);
+}
+
+.headerIcon {
+  width: clamp(5rem, 12vw, 8rem);
+  margin-bottom: 0.5rem;
+}
+
+.formHeaders h1 {
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  margin: 0;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 3vw, 1.2rem);
+}
+
+label {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: clamp(0.6rem, 1.5vw, 0.8rem) clamp(0.8rem, 2vw, 1rem);
+  background-color: #111;
+  color: var(--secondary-color2);
+  border: 1px solid #333;
+  border-radius: 5px;
+  outline: none;
+  font-size: 1rem;
+}
+
+.passwordField {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.passwordField input {
+  flex: 1;
+}
+
+.toggleIcon {
+  position: absolute;
+  right: 1rem;
+  width: 1.8rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.toggleIcon:hover {
+  opacity: 1;
+}
+
+.submitBtn {
+  margin-top: 1rem;
+  background: linear-gradient(to right, var(--primary-color1), var(--primary-color2));
+  border: none;
+  padding: clamp(0.7rem, 2vw, 0.9rem);
+  color: var(--secondary-color2);
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  font-size: 1rem;
+}
+
+.submitBtn:hover {
+  transform: scale(1.05);
+}
+
+.forgot {
+  font-size: clamp(0.75rem, 1.5vw, 0.8rem);
+  color: #aaa;
+  text-align: right;
+  cursor: pointer;
+}
+
+.signupLink {
+  text-align: center;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  margin-top: 1rem;
+}
+
+.signupLink a {
+  color: var(--primary-color2);
+  text-decoration: underline;
+}
+
+.success {
+  color: var(--text-success);
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+  font-weight: bold;
+  text-align: center;
+}
+
+.danger {
+  color: var(--text-danger);
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  text-align: center;
+}
+
+@media (max-width: 360px) {
   .formWrapper {
-    background-color: #000;
-    padding: 2.5rem;
-    border-radius: 1rem;
-    width: 90%;
-    max-width: 400px;
-    box-shadow: 0 0 30px var(--primary-color1);
-    display: flex;
-    flex-direction: column;
-    color: var(--secondary-color2);
-    animation: fadeIn 0.5s ease-in-out;
-  }
-  
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  
-  .formHeaders {
-    text-align: center;
-    margin-bottom: 2rem;
-  }
-  
-  .headerIcon {
-    width: 8rem;
-    margin-bottom: 0.5rem;
+    padding: 1.5rem;
   }
 
-  .formHeaders h1{
-    font-size: 3.2rem;
+  .formHeaders h1 {
+    font-size: 2.2rem;
   }
-  
-  
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-  }
-  label{
-    font-size: 1.2rem;
-  }
-  
-  input[type="text"],
-  input[type="email"],
-  input[type="password"] {
-    width: 100%;
-    padding: 0.8rem 1rem;
-    background-color: #111;
-    color: var(--secondary-color2);
-    border: 1px solid #333;
-    border-radius: 5px;
-    outline: none;
-  }
-  
-  .passwordField {
-    position: relative;
-    display: flex;
-    align-items: center;
-  }
-  
-  .passwordField input {
-    flex: 1;
-  }
-  
+
   .toggleIcon {
-    position: absolute;
-    right: 1rem;
-    width: 1.8rem;
-    cursor: pointer;
-    opacity: 0.7;
+    width: 1.5rem;
   }
-  
-  .toggleIcon:hover {
-    opacity: 1;
-  }
-  
-  .submitBtn {
-    margin-top: 1rem;
-    background: linear-gradient(to right, var(--primary-color1), var(--primary-color2));
-    border: none;
-    padding: 0.9rem;
-    color: var(--secondary-color2);
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: 0.3s ease;
-  }
-  
-  .submitBtn:hover {
-    transform: scale(1.05);
-  }
-  
-  .forgot {
-    font-size: 0.8rem;
-    color: #aaa;
-    text-align: right;
-    cursor: pointer;
-  }
-  
-  .signupLink {
-    text-align: center;
-    font-size: 1.2rem;
-    margin-top: 1rem;
-  }
-  
-  .signupLink a {
-    color: var(--primary-color2);
-    text-decoration: none;
-    text-decoration: underline;
-  }
-  
-  .success{
-    color: var(--text-success);
-    font-size: 1.6rem;
-  }
-
-  .danger{
-    color: var(--text-danger);
-  }
+}

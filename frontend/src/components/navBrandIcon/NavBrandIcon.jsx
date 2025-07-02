@@ -8,11 +8,7 @@ export default function NavBrandIcon(){
       const {isLogged} = useAuth();
     
       const gotoMain = ()=>{
-        if(!isLogged){
             navigate("/landing")
-        } else{
-            navigate("/home")
-        }
       }
     return(
 
