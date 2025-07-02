@@ -1,5 +1,6 @@
 require("dotenv").config();
 const { TodoModel } = require("../models/user");
+const getRemainingTime = require("../utils/getRemainingTime");
 
 async function addTodo(req, res){
 
@@ -7,7 +8,7 @@ async function addTodo(req, res){
     const parsedTitle = String(title);
 
     if(!parsedTitle){
-        return res.status(400).json({msg: "Title is required"});
+        return res.status(400).json({error: "Title is required"});
     }
 
     try{
@@ -15,7 +16,7 @@ async function addTodo(req, res){
         const userId = req.userId;
 
         if(!userId){
-            return res.status(401).json({msg: "Access denied, Try logging out and signing again"})
+            return res.status(401).json({error: "Access denied, Try logging out and signing again"})
         }
 
         const newTodo = await TodoModel.create({
@@ -24,15 +25,15 @@ async function addTodo(req, res){
             deadline: deadline ?? null
         });
 
-        console.log(newTodo.title);
+        const endsIn = getRemainingTime(newTodo.deadline);
 
-        return res.status(200).json({msg: "Todo created", newTodo:{title: newTodo.title}});
+        return res.status(200).json({msg: "Todo created", newTodo:{title: newTodo.title, deadline: newTodo.deadline.toLocaleString(), endsIn}});
 
     } catch(err){
 
         return res
           .status(500)
-          .json({ msg: "Something went wrong. Please try again." });
+          .json({ errror: "Something went wrong. Please try again." });
 
     }
 

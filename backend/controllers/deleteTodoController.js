@@ -7,11 +7,11 @@ async function deleteTodo(req, res) {
     const selectedTodoId = req.body.selectedTodoId;
 
     if(!userId){
-        return res.status(401).json({msg: "Unauthorized"});
+        return res.status(401).json({error: "Unauthorized"});
     }
 
     if(!selectedTodoId) {
-        return res.status(400).json({msg: "Try again"});
+        return res.status(400).json({error: "Try again"});
     }
 
     try{
@@ -23,13 +23,13 @@ async function deleteTodo(req, res) {
 
 
         if(!todoFound){
-            return res.status(404).json({msg: "Todo not found"});
+            return res.status(404).json({error: "Todo not found"});
         }
 
         return res.status(200).json({msg: "Todo deleted"})
 
     } catch(err){
-        res.status(500).json({msg: "Something went wrong. Try again"});
+        res.status(500).json({error: "Something went wrong. Try again"});
     }
     
 }

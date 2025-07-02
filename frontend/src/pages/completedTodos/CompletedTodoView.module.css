@@ -1,0 +1,101 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: clamp(1rem, 3vh, 3%);
+  overflow: hidden;
+}
+
+.header {
+  padding-bottom: clamp(1rem, 3vh, 3%);
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  width: clamp(50%, 50rem, 60%);
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.headerTitle h1 {
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  color: var(--secondary-color2);
+  opacity: 0.7;
+  font-weight: lighter;
+  margin: 0;
+}
+
+.taskListWrapper {
+  height: 80vh;
+  width: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1rem 0;
+}
+
+/* Responsive Scrollbar (specific to task list) */
+.taskListWrapper::-webkit-scrollbar {
+  width: 6px;
+}
+
+.taskListWrapper::-webkit-scrollbar-track {
+  background: var(--secondary-color2);
+  border-radius: 10px;
+}
+
+.dropDown {
+  position: relative;
+  width: fit-content;
+}
+
+.dropDownList {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 10px 40px 10px 12px;
+  font-size: clamp(0.8rem, 1.2vw, 0.95rem);
+  border-radius: 8px;
+  border: 1px solid var(--primary-color1);
+  background-color: var(--secondary-color1);
+  color: var(--secondary-color2);
+  cursor: pointer;
+  width: clamp(140px, 40vw, 180px);
+}
+
+.dropdownArrow {
+  position: absolute;
+  pointer-events: none;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+}
+
+
+@media screen and (max-width: 1024px) {
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    padding-top: 20rem;
+  }
+}
+
+@media (max-width: 768px) {
+}
+
+@media (max-width: 435px) {
+  .container{
+    padding-left: 5rem;
+  }
+}

@@ -1,0 +1,288 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -3;
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+}
+
+.displaySection {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 3%;
+}
+
+.firstSection {
+  position: relative;
+  width: 100%;
+  height: 33.3%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: 20%;
+  padding-top: 10%;
+  gap: 1rem;
+}
+
+.secondSection {
+  position: relative;
+  width: 100%;
+  height: 33.3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.thirdSection {
+  position: relative;
+  width: 100%;
+  height: 33.3%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding-right: 20%;
+
+}
+
+.userGreet {
+  font-size: clamp(2.5rem, 5vw, 7rem);
+  font-weight: 600;
+  opacity: 0.6;
+  background: linear-gradient(to bottom, var(--secondary-color2), #5e5d5d);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.3rem;
+}
+
+.addTaskTxt {
+  font-size: clamp(1.8rem, 3vw, 4rem);
+  color: var(--secondary-color2);
+  opacity: 0.78;
+}
+
+.stepsList {
+  color: var(--secondary-color2);
+  font-size: clamp(1rem, 1.8vw, 1.5rem);
+  opacity: 0.5;
+  font-weight: 500;
+  padding-left: 2rem;
+  line-height: 25px;
+}
+
+.objectiveList {
+  color: var(--secondary-color2);
+  font-size: clamp(1rem, 1.8vw, 1.5rem);
+  opacity: 0.5;
+  font-weight: 500;
+  line-height: 25px;
+}
+
+.inputSection {
+  position: fixed;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 30% 3rem 30%;
+  bottom: 2rem;
+}
+
+.inputSectionText {
+  width: 100%;
+  color: var(--secondary-color2);
+  user-select: none;
+}
+
+.inputWrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.customDatePickerStyles {
+  background: var(--secondary-color1) !important;
+  color: var(--secondary-color2) !important;
+  border: 0.5px solid var(--secondary-color1) !important;
+  outline: none !important;
+  color: aliceblue !important;
+  user-select: none;
+  cursor: pointer;
+}
+
+.addTodoBtn {
+  padding: 0 3rem;
+  font-weight: bold;
+  background: linear-gradient(
+    to right,
+    var(--primary-color2),
+    var(--primary-color1-shaded)
+  );
+  color: #fff;
+  letter-spacing: 0.1rem;
+  font-size: clamp(1rem, 1.8vw, 1.5rem);
+  cursor: pointer;
+  outline: none;
+  border: none;
+  transition: transform 0.3s ease;
+  opacity: 0.9;
+}
+
+.addTodoBtn:active {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+.addTodoField {
+  height: 5rem;
+  outline: none;
+}
+
+.clear {
+  padding: 0 1.5rem;
+  outline: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(3px);
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal {
+  padding: 2rem 2.5rem;
+  border-radius: 0.625rem;
+  text-align: center;
+  min-width: 300px;
+  max-width: 90%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.errorModal {
+  background-color: var(--secondary-color1);
+  color: var(--text-danger);
+  border-left: 6px solid var(--text-danger);
+}
+
+.successModal {
+  background-color: var(--secondary-color1);
+  color: var(--secondary-color2);
+  border-left: 6px solid var(--primary-color2);
+}
+
+.modalButtons {
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.modalButtons button {
+  padding: 0.5rem 1.2rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: var(--primary-color1-shaded);
+  color: white;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  transition: background 0.2s ease;
+}
+
+.modalButtons button:hover {
+  background-color: var(--primary-color1);
+}
+
+.todoCardAppeared {
+  width: 100%;
+  height: 70%;
+  margin-top: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--secondary-color2);
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 1300px) {
+  .inputSection {
+    padding: 0 20% 3rem 20%;
+  }
+    
+}
+
+@media screen and (max-width: 768px) {
+  .inputSection {
+    padding: 0 15% 3rem 15%;
+  }
+
+  .firstSection{
+    padding: 0;
+    align-items: center;
+    padding-top: 10rem;
+  }
+  .thirdSection{
+    display: none;
+  }
+    
+}
+
+@media screen and (max-width: 425px) {
+  .inputSection {
+    padding: 0 10% 3rem 20%;
+  }
+
+  .firstSection{
+    display: none;
+  }
+  .thirdSection{
+    display: none;
+  }
+
+  .secondSection{
+    height: 100%;
+  }
+
+  .addTodoField{
+    height: 4rem;
+  }
+
+  .userGreet{
+    font-size: 2rem;
+  }
+    
+}
+
+@media screen and (max-width: 320px) {
+  .userGreet{
+    font-size: 1rem;
+  }
+}

@@ -5,12 +5,13 @@ const signupSchema = z.object({
     .string()
     .trim()
     .min(1, "Username is required")
-    .max(20, "Username must be less than 20 characters"),
-  email: z
+    .max(10, "Username must be less than 10 characters"),
+    email: z
     .string()
     .trim()
     .email("Invalid email format")
-    .min(1, "Email is required"),
+    .min(1, "Email is required")
+    .transform((val) => val.toLowerCase()),
   password: z
     .string()
     .trim()
@@ -22,7 +23,8 @@ const signinSchema = z.object({
     .string()
     .trim()
     .email("Invalid email format")
-    .min(1, "Email is required"),
+    .min(1, "Email is required")
+    .transform((val) => val.toLowerCase()),
   password: z
     .string()
     .trim()

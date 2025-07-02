@@ -41,8 +41,9 @@ export default function Login() {
       if (response.status === 200) {
         const data = await response.json(); 
         setSuccessMessage(data.msg);
+        console.log("ran")
         setTimeout(()=>{
-          navigate("/home");
+          window.location.href = "/home";
         }, 1000)
         localStorage.setItem("token", data.token);
       } else if (response.status === 500) {

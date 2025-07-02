@@ -7,7 +7,7 @@ async function updateTodo(req, res){
     const parsedTitle = String(title);
     
     if(!parsedTitle){
-        return res.status(400).json({msg: "No change"})
+        return res.status(400).json({error: "No change"})
     }
 
     try{
@@ -16,19 +16,18 @@ async function updateTodo(req, res){
             {
                 title: parsedTitle,
                 deadline: deadline ?? null,
-                completed: false
             },
-            {new: true} //this will return updated doc
+            {new: true}
         );
 
         if(!updateTodo){
-            return res.status(404).json({msg: "Todo not found, cannot update."})
+            return res.status(404).json({error: "Todo not found, cannot update."})
         }
 
         return res.status(200).json({msg: "Todo updated", todo: updateTodo})
 
     } catch(err){
-        return res.status(500).json({msg: "Something Went wrong, Try again"});
+        return res.status(500).json({error: "Something Went wrong, Try again"});
     }
 
 }
