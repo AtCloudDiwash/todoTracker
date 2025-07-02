@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Landing from "./Landing";
 import Signup from "./pages/signup/Signup";
 import Login from "./pages/login/Login";
@@ -12,6 +12,7 @@ export default function App() {
       <Router>
         <Routes>
           <Route path="/landing" element={<Landing />}></Route>
+          <Route path="/" element={<Navigate to="/landing"/>} />
           <Route path="/signup" element={<Signup />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route

@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "@splinetool/react-spline": "^4.0.0",
-    "date-fns": "^4.1.0",
-    "react-datepicker": "^8.4.0"
-  }
-}
