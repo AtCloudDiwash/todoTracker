@@ -1,18 +1,13 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import styles from "./Landing.module.css";
-
 import NavBrandIcon from "./components/navBrandIcon/NavBrandIcon";
 import SignupButton from "./components/buttons/SignupButton";
 import LoginButton from "./components/buttons/LoginButton";
 import GetStartedButton from "./components/buttons/GetStartedButton";
 import Preloader from "./components/preloader/Preloader";
 import bgVideo from "./assets/bgVideo.mp4";
-import { useAuth } from "./context/AuthContext";
 
 export default function Landing() {
-  const navigate = useNavigate();
-  const { isLogged } = useAuth();
 
   const [loading, setLoading] = useState(true);
 
@@ -28,11 +23,7 @@ export default function Landing() {
       return () => window.removeEventListener("load", handleLoad);
     }
   }, []);
-  // useEffect(() => {
-  //   if (isLogged) {
-  //     navigate("/home");
-  //   }
-  // }, [isLogged, navigate]);
+
 
   if (loading) {
     return <Preloader />;
