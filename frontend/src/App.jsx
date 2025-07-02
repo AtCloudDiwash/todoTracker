@@ -4,7 +4,7 @@ import Signup from "./pages/signup/Signup";
 import Login from "./pages/login/Login";
 import PageNotFound from "./pages/404/PageNotFound";
 import Home from "./pages/home/Home";
-import { UserDetailsProvider } from "./context/UserDetailsContext";
+import { UserDetailsProvider } from "./context/userDetailsContext";
 
 export default function App() {
   return (
