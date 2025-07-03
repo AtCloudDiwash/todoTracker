@@ -4,13 +4,19 @@ import { useState, useRef, useEffect } from "react";
 import swooshSound from "../../assets/soundEffects/swoosh.mp3";
 import { gsap } from "gsap";
 import DatePicker from "react-datepicker";
-import { FaTimes } from "react-icons/fa"; 
+import { FaTimes } from "react-icons/fa";
 import "react-datepicker/dist/react-datepicker.css";
 import getTimeRemaining from "../../utils/getRemainingTime";
+import editIcon from "../../assets/edit.svg";
 
-export default function TodoCard({ title, deadline, id, expireThem = true}) {
+export default function TodoCard({ title, deadline, id, expireThem = true }) {
   const [isChecked, setIsChecked] = useState(false);
-  const [remainingTime, setRemainingTime] = useState({hours: 0, minutes: 0, seconds: 0, expired: false});
+  const [remainingTime, setRemainingTime] = useState({
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+    expired: false,
+  });
   const containerRef = useRef(true);
   const [editMode, setEditMode] = useState(false);
   const [editTitle, setEditTitle] = useState(title);
@@ -20,16 +26,16 @@ export default function TodoCard({ title, deadline, id, expireThem = true}) {
 
   const deadlinePassed = new Date() > new Date(deadline);
 
-  useEffect(()=>{
-    setRemainingTime(getTimeRemaining(deadline))
-  }, [deadline])
-  
+  useEffect(() => {
+    setRemainingTime(getTimeRemaining(deadline));
+  }, [deadline]);
+
   useEffect(() => {
     if (expireThem === false) {
       setIsChecked(true);
     }
   }, [expireThem]);
-  
+
   const handleCheckboxChange = (e) => {
     setIsChecked(e.target.checked);
     const audio = new Audio(swooshSound);
@@ -37,25 +43,28 @@ export default function TodoCard({ title, deadline, id, expireThem = true}) {
     audio.play();
   };
 
-  useEffect(()=>{
-    const todoCompleted = async ()=>{
+  useEffect(() => {
+    const todoCompleted = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_REACT_APP_RENDERER_URL}/todo-completed`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: localStorage.getItem("token"),
-          },
-          body: JSON.stringify({ todoId: id }),
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_REACT_APP_RENDERER_URL}/todo-completed`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: localStorage.getItem("token"),
+            },
+            body: JSON.stringify({ todoId: id }),
+          }
+        );
 
         if (response.status === 200) {
-            console.log("Completed")
+          console.log("Completed");
         }
       } catch (err) {
         console.error("Error marking todo complete:", err);
       }
-    }
+    };
 
     if (isChecked) {
       todoCompleted();
@@ -75,7 +84,6 @@ export default function TodoCard({ title, deadline, id, expireThem = true}) {
           return { hours: 0, minutes: 0, seconds: 0 };
         }
 
-     
         totalSeconds -= 1;
 
         const hours = Math.floor(totalSeconds / 3600);
@@ -84,9 +92,9 @@ export default function TodoCard({ title, deadline, id, expireThem = true}) {
 
         return { hours, minutes, seconds };
       });
-    }, 1000); 
+    }, 1000);
 
-    return () => clearInterval(intervalId); 
+    return () => clearInterval(intervalId);
   }, [isChecked, editDeadline, editTitle]);
 
   useEffect(() => {
@@ -113,70 +121,80 @@ export default function TodoCard({ title, deadline, id, expireThem = true}) {
   }, [isChecked, deadlinePassed]);
 
   const handleUpdate = async () => {
-
-      try{
-        const response = await fetch(`${import.meta.env.VITE_REACT_APP_RENDERER_URL}/edit`, {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_REACT_APP_RENDERER_URL}/edit`,
+        {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": localStorage.getItem("token")
+            Authorization: localStorage.getItem("token"),
           },
-          body: JSON.stringify({selectedTodoId: id, title: editTitle, deadline: editDeadline})
-        });
-
-        if(response.status === 200){
-          setEditMode(false);
-        } else if(response.status === 404){
-          const data = await response.json();
-          setUpdateError(data.error)
-        } else if (response.status === 500){
-          const data = await response.json();
-          setUpdateError(data.error);
-        } else {
-          const data = await response.json();
-          setUpdateError(data.error)
+          body: JSON.stringify({
+            selectedTodoId: id,
+            title: editTitle,
+            deadline: editDeadline,
+          }),
         }
-      } catch(err){
-        setUpdateError("Something went wrong please try again")
+      );
+
+      if (response.status === 200) {
+        setEditMode(false);
+      } else if (response.status === 404) {
+        const data = await response.json();
+        setUpdateError(data.error);
+      } else if (response.status === 500) {
+        const data = await response.json();
+        setUpdateError(data.error);
+      } else {
+        const data = await response.json();
+        setUpdateError(data.error);
       }
-
-
+    } catch (err) {
+      setUpdateError("Something went wrong please try again");
+    }
   };
-useEffect(()=>{
-  if (editTitle !== title || editDeadline !== deadline) {
-    console.log("Entered")
-    setDisableUpdate(false);
-
-  } else {
-    setDisableUpdate(true);
-  }
-}, [editTitle, editDeadline])
+  useEffect(() => {
+    if (editTitle !== title || editDeadline !== deadline) {
+      console.log("Entered");
+      setDisableUpdate(false);
+    } else {
+      setDisableUpdate(true);
+    }
+  }, [editTitle, editDeadline]);
   const handleDelete = async () => {
-    try{
-      const response = await fetch(`${import.meta.env.VITE_REACT_APP_RENDERER_URL}/delete`, {
-        method:"DELETE",
-        headers:{
-          "Content-Type": "application/json",
-          "Authorization": localStorage.getItem("token")
-        },
-        body: JSON.stringify({selectedTodoId: id})
-      });
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_REACT_APP_RENDERER_URL}/delete`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: localStorage.getItem("token"),
+          },
+          body: JSON.stringify({ selectedTodoId: id }),
+        }
+      );
 
-      if(response.status === 200){
+      if (response.status === 200) {
         const data = await response.json();
-        alert(data.msg)
+        alert(data.msg);
         setUpdateError(data.msg);
-      } else if(response.status === 404){
+      } else if (response.status === 404) {
         const data = await response.json();
-        setUpdateError(data.error)
+        setUpdateError(data.error);
       }
-    } catch(err){
+    } catch (err) {
       setUpdateError(err);
     }
   };
 
   return (
     <>
+      <button className={styles.editButton} onClick={() => setEditMode(true)}>
+        <img src={editIcon} alt="Edit Icon" className={styles.editIcon} />
+        <span>Edit</span>
+      </button>
       <div
         className={styles.cardWrapper}
         style={{
@@ -185,7 +203,6 @@ useEffect(()=>{
           boxShadow: isChecked && "none",
         }}
         ref={containerRef}
-        onClick={() => setEditMode(true)}
       >
         <div className={styles.leftSection}>
           <label className={styles.labelWrapper}>
@@ -226,7 +243,7 @@ useEffect(()=>{
         </div>
       </div>
 
-      {editMode && expireThem? (
+      {editMode && expireThem ? (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
             <div
@@ -266,7 +283,7 @@ useEffect(()=>{
             </div>
           </div>
         </div>
-      ):null}
+      ) : null}
     </>
   );
 }

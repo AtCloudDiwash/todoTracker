@@ -211,3 +211,28 @@
     width: 20rem;
   }
 }
+
+.editButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  cursor: pointer;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.editButton:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.editIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  object-fit: contain;
+}
