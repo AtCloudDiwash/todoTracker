@@ -17,14 +17,15 @@ export default function TodoCard({ title, deadline, id, expireThem = true }) {
     seconds: 0,
     expired: false,
   });
-  const containerRef = useRef(true);
+  const containerRef = useRef(null);
   const [editMode, setEditMode] = useState(false);
   const [editTitle, setEditTitle] = useState(title);
   const [editDeadline, setEditDeadline] = useState(deadline);
   const [updateError, setUpdateError] = useState(null);
   const [disableUpdate, setDisableUpdate] = useState(true);
 
-  const deadlinePassed = new Date() > new Date(deadline);
+  const deadlinePassed =
+    deadline && !isNaN(new Date(deadline)) && new Date() > new Date(deadline);
 
   useEffect(() => {
     setRemainingTime(getTimeRemaining(deadline));
@@ -76,12 +77,16 @@ export default function TodoCard({ title, deadline, id, expireThem = true }) {
 
     const intervalId = setInterval(() => {
       setRemainingTime((prevTime) => {
+        if (!prevTime || typeof prevTime.hours === "undefined") {
+          return { hours: 0, minutes: 0, seconds: 0, expired: true };
+        }
+
         let totalSeconds =
           prevTime.hours * 3600 + prevTime.minutes * 60 + prevTime.seconds;
 
         if (totalSeconds <= 1) {
           clearInterval(intervalId);
-          return { hours: 0, minutes: 0, seconds: 0 };
+          return { hours: 0, minutes: 0, seconds: 0, expired: true };
         }
 
         totalSeconds -= 1;
@@ -90,7 +95,7 @@ export default function TodoCard({ title, deadline, id, expireThem = true }) {
         const minutes = Math.floor((totalSeconds % 3600) / 60);
         const seconds = totalSeconds % 60;
 
-        return { hours, minutes, seconds };
+        return { hours, minutes, seconds, expired: false };
       });
     }, 1000);
 
@@ -100,7 +105,7 @@ export default function TodoCard({ title, deadline, id, expireThem = true }) {
   useEffect(() => {
     let animation;
 
-    if (isChecked == false && !deadlinePassed) {
+    if (!isChecked && !deadlinePassed) {
       animation = gsap.to(containerRef.current, {
         scale: 1.03,
         duration: 0.4,
@@ -114,9 +119,7 @@ export default function TodoCard({ title, deadline, id, expireThem = true }) {
     }
 
     return () => {
-      if (animation) {
-        animation.kill();
-      }
+      if (animation) animation.kill();
     };
   }, [isChecked, deadlinePassed]);
 
@@ -133,35 +136,32 @@ export default function TodoCard({ title, deadline, id, expireThem = true }) {
           body: JSON.stringify({
             selectedTodoId: id,
             title: editTitle,
-            deadline: editDeadline,
+            deadline: new Date(editDeadline).toISOString(),
           }),
         }
       );
 
+      const data = await response.json();
+
       if (response.status === 200) {
         setEditMode(false);
-      } else if (response.status === 404) {
-        const data = await response.json();
-        setUpdateError(data.error);
-      } else if (response.status === 500) {
-        const data = await response.json();
-        setUpdateError(data.error);
+        setUpdateError(null);
       } else {
-        const data = await response.json();
-        setUpdateError(data.error);
+        setUpdateError(data.error || "Something went wrong.");
       }
     } catch (err) {
-      setUpdateError("Something went wrong please try again");
+      setUpdateError("Something went wrong, please try again.");
     }
   };
+
   useEffect(() => {
     if (editTitle !== title || editDeadline !== deadline) {
-      console.log("Entered");
       setDisableUpdate(false);
     } else {
       setDisableUpdate(true);
     }
   }, [editTitle, editDeadline]);
+
   const handleDelete = async () => {
     try {
       const response = await fetch(
@@ -176,25 +176,28 @@ export default function TodoCard({ title, deadline, id, expireThem = true }) {
         }
       );
 
+      const data = await response.json();
+
       if (response.status === 200) {
-        const data = await response.json();
         alert(data.msg);
         setUpdateError(data.msg);
-      } else if (response.status === 404) {
-        const data = await response.json();
+      } else {
         setUpdateError(data.error);
       }
     } catch (err) {
-      setUpdateError(err);
+      setUpdateError("Failed to delete. Try again.");
     }
   };
 
   return (
     <>
-      <button className={styles.editButton} onClick={() => setEditMode(true)}>
-        <img src={editIcon} alt="Edit Icon" className={styles.editIcon} />
-        <span>Edit</span>
-      </button>
+      {expireThem && (
+        <button className={styles.editButton} onClick={() => setEditMode(true)}>
+          <img src={editIcon} alt="Edit Icon" className={styles.editIcon} />
+          <span>Edit</span>
+        </button>
+      )}
+
       <div
         className={styles.cardWrapper}
         style={{
@@ -234,23 +237,25 @@ export default function TodoCard({ title, deadline, id, expireThem = true }) {
             <RotatingClock motion={!isChecked && !deadlinePassed} />
           </div>
           <p className={styles.remainingTime}>
-            {new Date() > new Date(deadline)
+            {deadlinePassed
               ? "Deadline passed"
-              : `Ends in ${remainingTime.hours ?? "1"}h ${
-                  remainingTime.minutes ?? "2"
-                }m ${remainingTime.seconds ?? "3"}s`}
+              : remainingTime
+              ? `Ends in ${remainingTime.hours ?? 0}h ${
+                  remainingTime.minutes ?? 0
+                }m ${remainingTime.seconds ?? 0}s`
+              : "Calculating..."}
           </p>
         </div>
       </div>
 
-      {editMode && expireThem ? (
+      {editMode && expireThem && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
             <div
               className={styles.closeButton}
               onClick={() => setEditMode(false)}
             >
-              <FaTimes onClick={() => setEditMode(false)} />
+              <FaTimes />
             </div>
             <h2>Edit Todo</h2>
             <input
@@ -269,6 +274,9 @@ export default function TodoCard({ title, deadline, id, expireThem = true }) {
               dateFormat="yyyy-MM-dd HH:mm"
               className={styles.inputField}
             />
+            {updateError && (
+              <p className={styles.errorMessage}>{updateError}</p>
+            )}
             <div className={styles.modalButtons}>
               <button
                 onClick={handleUpdate}
@@ -283,7 +291,7 @@ export default function TodoCard({ title, deadline, id, expireThem = true }) {
             </div>
           </div>
         </div>
-      ) : null}
+      )}
     </>
   );
 }
