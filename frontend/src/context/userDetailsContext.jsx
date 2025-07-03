@@ -26,6 +26,8 @@ export const UserDetailsProvider = ({ children }) => {
         if(response.status == 200){
             const username = await response.json();
             setUsername(username.username)
+        } else if(response.status === 500){
+          localStorage.removeItem("token")
         }
 
     } catch(err){

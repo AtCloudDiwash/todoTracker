@@ -10,20 +10,22 @@ import AddTaskView from "../addTodo/AddTaskView";
 import TaskListView from "../taskList/TaskListView";
 import CompletedTodoView from "../completedTodos/CompletedTodoView";
 import NebulaParticle from "../../components/nebula/NebulaParticle";
+import TodoCard from "../../components/todoCard/TodoCard";
 
 export default function Home() {
   const navigate = useNavigate();
   const [selectedView, setSelectedView] = useState("add task");
-  const { isLogged } = useAuth();
+  const { isLogged, isLoading } = useAuth();
   const [loading, setLoading] = useState(true);
   const { username } = useUserDetails();
   const [toggle, onToggle] = useState(false);
 
   useEffect(() => {
+    if (isLoading) return; 
     if (!isLogged) {
       navigate("/login");
     }
-  }, [isLogged, navigate]);
+  }, [isLogged, isLoading, navigate]);
 
   const renderContent = () => {
     switch (selectedView) {
@@ -51,7 +53,7 @@ export default function Home() {
     }
   }, []);
 
-  return !loading ? (
+  return !loading || isLoading ? (
     <>
       <Sidebar setSelectedView={setSelectedView} />
       <ProfileToggle username={username} onToggle={onToggle} />
