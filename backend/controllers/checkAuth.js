@@ -12,7 +12,7 @@ async function checkAuth(req, res){
 
     } catch(err) {
 
-        return res.status(401).json({msg: "Invalid token"})
+        return res.json({msg: "Invalid token"})
 
     }
 

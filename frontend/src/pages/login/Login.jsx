@@ -41,7 +41,6 @@ export default function Login() {
       if (response.status === 200) {
         const data = await response.json(); 
         setSuccessMessage(data.msg);
-        console.log("ran")
         setTimeout(()=>{
           window.location.href = "/home";
         }, 1000)
